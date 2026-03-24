@@ -1,22 +1,112 @@
-/* লোগো ডিজাইন */
+/* গুগল ফন্ট ইমপোর্ট */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: radial-gradient(circle at center, #1a2a6c, #b21f1f, #fdbb2d); /* ডিজিটাল গ্রেডিয়েন্ট */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    overflow: hidden;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px); /* গ্লাস ইফেক্ট */
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 25px;
+    border-radius: 30px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
 .bot-logo {
     width: 80px;
     height: 80px;
-    background: #00d2ff;
-    border-radius: 50%;
+    background: linear-gradient(45deg, #00d2ff, #3a7bd5);
     margin: 0 auto 15px;
+    border-radius: 50%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 30px;
-    box-shadow: 0 0 20px #00d2ff;
+    align-items: center;
+    font-size: 40px;
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
 }
 
-/* চ্যাট বক্স ডিজাইন */
+h1 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
 #chat-container {
-    height: 300px;
+    height: 250px;
     overflow-y: auto;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
     text-align: left;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* চ্যাট বাবল ডিজাইন */
+#chat-container p {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+#userInput {
+    width: 70%;
+    padding: 12px;
+    border-radius: 15px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    outline: none;
+}
+
+button {
+    padding: 12px 20px;
+    border-radius: 15px;
+    border: none;
+    background: #00d2ff;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #fff;
+    transform: scale(1.05);
+}
+
+#qrcode {
+    margin-top: 20px;
+    background: white;
+    padding: 10px;
+    border-radius: 15px;
+    display: inline-block;
+}
+
+#downloadBtn {
+    display: none;
+    margin-top: 15px;
+    color: #00d2ff;
+    text-decoration: none;
+    font-weight: bold;
 }
