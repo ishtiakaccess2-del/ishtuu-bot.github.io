@@ -1,4 +1,4 @@
-// ১. Firebase কনফিগারেশন (আপনার প্রজেক্ট সেটিংস থেকে এখানে বসান)
+// ১. Firebase কনফিগারেশন (এটি আপনার কনসোল থেকে পাওয়া কোড দিয়ে অবশ্যই আপডেট করবেন)
 const firebaseConfig = {
     apiKey: "AIzaSyBq6XsGEmnul-QVJNyemafvDICPTxbIrK0",
     authDomain: "ishtuu-app.firebaseapp.com",
@@ -11,32 +11,59 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
-// ২. গুগল লগইন ফাংশন
-function googleLogin() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider).then(() => location.reload());
+// ২. চ্যাট এবং কমান্ডের লজিক
+function processCommand() {
+    let inputField = document.getElementById('userInput');
+    let userInput = inputField.value.trim();
+    let chatContainer = document.getElementById('chat-container');
+
+    if (userInput === "") return;
+
+    // ইউজারের মেসেজ চ্যাটে দেখানো
+    chatContainer.innerHTML += `<p><b>তুমি:</b> ${userInput}</p>`;
+    
+    // বট কি করবে তার লজিক
+    if (userInput.toLowerCase() === "হাই" || userInput.toLowerCase() === "hello") {
+        botResponse("হ্যালো! আমি ইস্তু। আমি তোমার জন্য QR কোড তৈরি করতে পারি। (ফোন, লিঙ্ক, টেক্সট, বা ইমোজি লিখুন)");
+    } else {
+        // এখানে QR জেনারেটরের কাজ শুরু হবে
+        generateQR(userInput);
+        botResponse("তোমার QR কোড তৈরি হয়েছে! নিচে ডাউনলোড করো:");
+    }
+
+    inputField.value = ""; // ইনপুট খালি করা
+    chatContainer.scrollTop = chatContainer.scrollHeight; // স্ক্রল নিচে রাখা
 }
 
-// ৩. লগইন চেক ও ওয়েলকাম মেসেজ
-auth.onAuthStateChanged(user => {
-    if (user) {
-        document.getElementById('login-screen').style.display = 'none';
-        document.getElementById('bot-screen').style.display = 'block';
-        document.getElementById('welcome-msg').innerText = `হ্যালো ${user.displayName}! আমি ইস্তু, তোমাকে কীভাবে সাহায্য করতে পারি?`;
+// ৩. বট রেসপন্স ফাংশন
+function botResponse(msg) {
+    document.getElementById('chat-container').innerHTML += `<p><b>Ishtuu:</b> ${msg}</p>`;
+}
+
+// ৪. QR জেনারেশন ও ডাউনলোড ফাংশন
+function generateQR(data) {
+    const qrDiv = document.getElementById("qrcode");
+    qrDiv.innerHTML = ""; // আগের QR মুছে ফেলা
+    
+    // QR কোড তৈরি
+    new QRCode(qrDiv, {
+        text: data,
+        width: 150,
+        height: 150
+    });
+
+    // ডাউনলোড বাটন দেখানো
+    setTimeout(() => {
+        const qrCanvas = qrDiv.querySelector("img");
+        const downloadBtn = document.getElementById("downloadBtn");
+        downloadBtn.href = qrCanvas.src;
+        downloadBtn.style.display = "inline-block";
+    }, 500);
+}
+
+// ৫. এন্টার কি (Enter Key) দিয়ে সেন্ড করার সুবিধা
+document.getElementById('userInput').addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        processCommand();
     }
 });
-
-// ৪. QR জেনারেটর লজিক
-function showInput(type) {
-    document.getElementById('input-section').innerHTML = `
-        <p>দয়া করে আপনার ${type} দিন:</p>
-        <input type="text" id="userInput" placeholder="${type} লিখুন...">
-        <button onclick="generate()">QR তৈরি করুন</button>
-    `;
-}
-
-function generate() {
-    const data = document.getElementById('userInput').value;
-    document.getElementById('qrcode').innerHTML = ""; // আগের QR মোছা
-    new QRCode(document.getElementById("qrcode"), data);
-}
