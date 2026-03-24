@@ -1,4 +1,4 @@
-// ১. Firebase কনফিগারেশন (এটি আপনার কনসোল থেকে পাওয়া কোড দিয়ে অবশ্যই আপডেট করবেন)
+// Firebase কনফিগারেশন (আপনার কনসোল থেকে এগুলো বসান)
 const firebaseConfig = {
     apiKey: "AIzaSyBq6XsGEmnul-QVJNyemafvDICPTxbIrK0",
     authDomain: "ishtuu-app.firebaseapp.com",
@@ -7,11 +7,8 @@ const firebaseConfig = {
     messagingSenderId: "783914087222",
     appId: "1:783914087222:web:541a91e77ff9ca184f7997"
 };
-
 firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
 
-// ২. চ্যাট এবং কমান্ডের লজিক
 function processCommand() {
     let inputField = document.getElementById('userInput');
     let userInput = inputField.value.trim();
@@ -19,89 +16,41 @@ function processCommand() {
 
     if (userInput === "") return;
 
-    // ইউজারের মেসেজ চ্যাটে দেখানো
-    chatContainer.innerHTML += `<p><b>তুমি:</b> ${userInput}</p>`;
-    
-    // বট কি করবে তার লজিক
-    if (userInput.toLowerCase() === "হাই" || userInput.toLowerCase() === "hello") {
-        botResponse("হ্যালো! আমি ইস্তু। আমি তোমার জন্য QR কোড তৈরি করতে পারি। (ফোন, লিঙ্ক, টেক্সট, বা ইমোজি লিখুন)");
-    } else {
-        // এখানে QR জেনারেটরের কাজ শুরু হবে
+    // ইউজারের মেসেজ
+    chatContainer.innerHTML += `<p class="user-msg"><b>তুমি:</b> ${userInput}</p>`;
+    inputField.value = "";
+
+    // বটের রেসপন্স ও লজিক
+    setTimeout(() => {
+        let response = "";
+        if (userInput.toLowerCase().includes("ফোন") || userInput.toLowerCase().includes("number")) {
+            response = "ঠিক আছে, এই নিন আপনার ফোনের কিউআর কোড:";
+        } else if (userInput.toLowerCase().includes("লিঙ্ক") || userInput.toLowerCase().includes("http")) {
+            response = "চমৎকার লিঙ্ক! এই নিন কিউআর কোড:";
+        } else {
+            response = "ইস্তু বুঝতে পেরেছে! এই নিন আপনার কিউআর কোড:";
+        }
+        
+        chatContainer.innerHTML += `<p class="bot-msg"><b>Ishtuu:</b> ${response}</p>`;
         generateQR(userInput);
-        botResponse("তোমার QR কোড তৈরি হয়েছে! নিচে ডাউনলোড করো:");
-    }
-
-    inputField.value = ""; // ইনপুট খালি করা
-    chatContainer.scrollTop = chatContainer.scrollHeight; // স্ক্রল নিচে রাখা
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }, 600);
 }
 
-// ৩. বট রেসপন্স ফাংশন
-function botResponse(msg) {
-    document.getElementById('chat-container').innerHTML += `<p><b>Ishtuu:</b> ${msg}</p>`;
-}
-
-// ৪. QR জেনারেশন ও ডাউনলোড ফাংশন
 function generateQR(data) {
     const qrDiv = document.getElementById("qrcode");
-    qrDiv.innerHTML = ""; // আগের QR মুছে ফেলা
+    qrDiv.innerHTML = "";
+    new QRCode(qrDiv, { text: data, width: 160, height: 160 });
     
-    // QR কোড তৈরি
-    new QRCode(qrDiv, {
-        text: data,
-        width: 150,
-        height: 150
-    });
-
-    // ডাউনলোড বাটন দেখানো
     setTimeout(() => {
         const qrCanvas = qrDiv.querySelector("img");
         const downloadBtn = document.getElementById("downloadBtn");
         downloadBtn.href = qrCanvas.src;
-        downloadBtn.style.display = "inline-block";
+        downloadBtn.style.display = "block";
     }, 500);
 }
 
-// ৫. এন্টার কি (Enter Key) দিয়ে সেন্ড করার সুবিধা
-document.getElementById('userInput').addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        processCommand();
-    }
+// এন্টার কি দিয়ে সেন্ড
+document.getElementById('userInput').addEventListener("keypress", (e) => {
+    if (e.key === "Enter") processCommand();
 });
-// ১. বট কতক্ষণ আগে মেসেজ পেয়েছে তার টাইম স্ট্যাম্প
-function getTime() {
-    return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-}
-
-// ২. উন্নত কমান্ড প্রসেসিং (এখন বট আরও বেশি শব্দ বুঝবে)
-function processCommand() {
-    let inputField = document.getElementById('userInput');
-    let userInput = inputField.value.trim();
-    let chatContainer = document.getElementById('chat-container');
-
-    if (userInput === "") return;
-
-    chatContainer.innerHTML += `<p style="text-align:right; color:#00d2ff;"><b>তুমি:</b> ${userInput}</p>`;
-    
-    // অটো রেসপন্স
-    setTimeout(() => {
-        if (userInput.toLowerCase().includes("ফোন") || userInput.toLowerCase().includes("number")) {
-            botResponse("ফোন নম্বরটি দিন, আমি সেটির QR কোড তৈরি করে দিচ্ছি।");
-            generateQR(userInput); 
-        } else if (userInput.toLowerCase().includes("লিঙ্ক") || userInput.toLowerCase().includes("http")) {
-            botResponse("আপনার লিঙ্কটি দারুণ! এই নিন আপনার QR কোড।");
-            generateQR(userInput);
-        } else {
-            botResponse("ইস্তু শুনছে... আপনি কি 'ফোন' বা 'লিঙ্ক' লিখে কিউআর কোড বানাতে চান?");
-            generateQR(userInput); // ডিফল্ট কাজ করবে
-        }
-    }, 500);
-
-    inputField.value = "";
-    chatContainer.scrollTop = chatContainer.scrollHeight;
-}
-
-// ৩. চ্যাট বাবল ফাংশন
-function botResponse(msg) {
-    let chatContainer = document.getElementById('chat-container');
-    chatContainer.innerHTML += `<p style="text-align:left;"><b>Ishtuu:</b> ${msg}</p>`;
-}
