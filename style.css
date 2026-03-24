@@ -110,3 +110,34 @@ button:hover {
     text-decoration: none;
     font-weight: bold;
 }
+/* লোগো অ্যানিমেশন - লোগোটি সবসময় ঘুরবে */
+.bot-logo {
+    animation: rotate 5s linear infinite;
+}
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* চ্যাট বক্স অ্যানিমেশন */
+#chat-container {
+    animation: fadeIn 1s ease-in;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ইনপুট ফিল্ড ও বাটন গ্লো ইফেক্ট */
+input:focus {
+    box-shadow: 0 0 10px #00d2ff;
+}
+
+button {
+    transition: 0.4s;
+    border: 2px solid transparent;
+}
+button:hover {
+    border: 2px solid #fff;
+    box-shadow: 0 0 15px #00d2ff;
+}
