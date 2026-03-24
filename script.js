@@ -67,3 +67,41 @@ document.getElementById('userInput').addEventListener("keypress", function(event
         processCommand();
     }
 });
+// ১. বট কতক্ষণ আগে মেসেজ পেয়েছে তার টাইম স্ট্যাম্প
+function getTime() {
+    return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+// ২. উন্নত কমান্ড প্রসেসিং (এখন বট আরও বেশি শব্দ বুঝবে)
+function processCommand() {
+    let inputField = document.getElementById('userInput');
+    let userInput = inputField.value.trim();
+    let chatContainer = document.getElementById('chat-container');
+
+    if (userInput === "") return;
+
+    chatContainer.innerHTML += `<p style="text-align:right; color:#00d2ff;"><b>তুমি:</b> ${userInput}</p>`;
+    
+    // অটো রেসপন্স
+    setTimeout(() => {
+        if (userInput.toLowerCase().includes("ফোন") || userInput.toLowerCase().includes("number")) {
+            botResponse("ফোন নম্বরটি দিন, আমি সেটির QR কোড তৈরি করে দিচ্ছি।");
+            generateQR(userInput); 
+        } else if (userInput.toLowerCase().includes("লিঙ্ক") || userInput.toLowerCase().includes("http")) {
+            botResponse("আপনার লিঙ্কটি দারুণ! এই নিন আপনার QR কোড।");
+            generateQR(userInput);
+        } else {
+            botResponse("ইস্তু শুনছে... আপনি কি 'ফোন' বা 'লিঙ্ক' লিখে কিউআর কোড বানাতে চান?");
+            generateQR(userInput); // ডিফল্ট কাজ করবে
+        }
+    }, 500);
+
+    inputField.value = "";
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+// ৩. চ্যাট বাবল ফাংশন
+function botResponse(msg) {
+    let chatContainer = document.getElementById('chat-container');
+    chatContainer.innerHTML += `<p style="text-align:left;"><b>Ishtuu:</b> ${msg}</p>`;
+}
