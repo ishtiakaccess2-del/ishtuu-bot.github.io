@@ -1,16 +1,44 @@
-<div class="container">
-    <div class="bot-logo">🤖</div> <!-- লোগো -->
-    <h1>Ishtuu Bot</h1>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ishtuu Bot</title>
+    <!-- CSS লিঙ্ক -->
+    <link rel="stylesheet" href="style.css">
     
-    <div id="chat-container">
-        <p><b>Ishtuu:</b> হ্যালো! আমি ইস্তু। তুমি কি কি তৈরি করতে চাও? (ফোন, লিঙ্ক, টেক্সট বা ইমোজি লিখুন)</p>
+    <!-- Firebase SDK (Firebase কনসোলের কনফিগারেশন অনুযায়ী) -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <!-- লোগো সেকশন -->
+        <div class="bot-logo">🤖</div>
+        <h1>Ishtuu Bot</h1>
+
+        <!-- চ্যাট বক্স -->
+        <div id="chat-container">
+            <p><b>Ishtuu:</b> হ্যালো! আমি ইস্তু। তুমি কী তৈরি করতে চাও? (ফোন, লিঙ্ক বা মেসেজ লিখে পাঠান)</p>
+        </div>
+
+        <!-- কমান্ড দেওয়ার ইনপুট -->
+        <div class="input-group">
+            <input type="text" id="userInput" placeholder="কমান্ড লিখুন...">
+            <button onclick="processCommand()">Send</button>
+        </div>
+
+        <!-- QR কোড এবং ডাউনলোড সেকশন -->
+        <div id="qr-result">
+            <div id="qrcode"></div>
+            <br>
+            <a id="downloadBtn" download="my-qr.png">QR কোড ডাউনলোড করুন</a>
+        </div>
     </div>
 
-    <input type="text" id="userInput" placeholder="কমান্ড লিখুন...">
-    <button onclick="processCommand()">Send</button>
-    
-    <div id="qr-result" style="display:none;">
-        <div id="qrcode"></div>
-        <a id="downloadBtn" download="my-qr.png">QR কোড ডাউনলোড করুন</a>
-    </div>
-</div>
+    <!-- JS ফাইল লিঙ্ক -->
+    <script src="script.js"></script>
+</body>
+</html>
