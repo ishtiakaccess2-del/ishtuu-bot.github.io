@@ -1,15 +1,10 @@
-/* গুগল ফন্ট ইমপোর্ট */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     font-family: 'Outfit', sans-serif;
-    background: radial-gradient(circle at center, #1a2a6c, #b21f1f, #fdbb2d); /* ডিজিটাল গ্রেডিয়েন্ট */
+    background: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -19,125 +14,52 @@ body {
 }
 
 .container {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px); /* গ্লাস ইফেক্ট */
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 25px;
     border-radius: 30px;
-    width: 90%;
+    width: 95%;
     max-width: 400px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
 }
 
 .bot-logo {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+    width: 70px; height: 70px;
+    background: linear-gradient(45deg, #00d2ff, #9d50bb);
     margin: 0 auto 15px;
     border-radius: 50%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 40px;
-    box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
+    justify-content: center; align-items: center;
+    font-size: 30px;
+    animation: rotate 6s linear infinite;
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
 }
 
-h1 {
-    font-size: 22px;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-}
+@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+h1 { font-size: 20px; margin-bottom: 15px; }
 
 #chat-container {
     height: 250px;
     overflow-y: auto;
     padding: 10px;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0,0,0,0.2);
     border-radius: 15px;
+    margin-bottom: 15px;
     text-align: left;
-    margin-bottom: 20px;
     font-size: 14px;
 }
 
-/* চ্যাট বাবল ডিজাইন */
-#chat-container p {
-    margin-bottom: 10px;
-    padding: 8px 12px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.1);
-}
+#chat-container p { margin-bottom: 10px; padding: 8px 12px; border-radius: 10px; }
+.user-msg { background: rgba(0, 210, 255, 0.2); text-align: right; margin-left: 20%; }
+.bot-msg { background: rgba(255, 255, 255, 0.1); text-align: left; margin-right: 20%; }
 
-#userInput {
-    width: 70%;
-    padding: 12px;
-    border-radius: 15px;
-    border: none;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    outline: none;
-}
+.input-group { display: flex; gap: 5px; }
+#userInput { flex: 1; padding: 12px; border-radius: 15px; border: none; background: rgba(255,255,255,0.1); color: white; outline: none; }
+button { padding: 10px 15px; border-radius: 15px; border: none; background: #00d2ff; font-weight: bold; cursor: pointer; transition: 0.3s; }
+button:hover { background: #fff; transform: scale(1.05); }
 
-button {
-    padding: 12px 20px;
-    border-radius: 15px;
-    border: none;
-    background: #00d2ff;
-    color: #000;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #fff;
-    transform: scale(1.05);
-}
-
-#qrcode {
-    margin-top: 20px;
-    background: white;
-    padding: 10px;
-    border-radius: 15px;
-    display: inline-block;
-}
-
-#downloadBtn {
-    display: none;
-    margin-top: 15px;
-    color: #00d2ff;
-    text-decoration: none;
-    font-weight: bold;
-}
-/* লোগো অ্যানিমেশন - লোগোটি সবসময় ঘুরবে */
-.bot-logo {
-    animation: rotate 5s linear infinite;
-}
-@keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-/* চ্যাট বক্স অ্যানিমেশন */
-#chat-container {
-    animation: fadeIn 1s ease-in;
-}
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* ইনপুট ফিল্ড ও বাটন গ্লো ইফেক্ট */
-input:focus {
-    box-shadow: 0 0 10px #00d2ff;
-}
-
-button {
-    transition: 0.4s;
-    border: 2px solid transparent;
-}
-button:hover {
-    border: 2px solid #fff;
-    box-shadow: 0 0 15px #00d2ff;
-}
+#qrcode { margin-top: 15px; background: white; padding: 10px; border-radius: 15px; display: inline-block; }
+#downloadBtn { display: none; margin-top: 10px; color: #00d2ff; text-decoration: none; font-weight: bold; }
