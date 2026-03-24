@@ -1,65 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    color: white;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    overflow: hidden; /* স্ক্রলিং সমস্যা এড়াতে */
-}
-
-.container {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    padding: 20px;
-    border-radius: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    text-align: center;
-    width: 90%; /* ফোনের স্ক্রিনের ৯০% জুড়ে থাকবে */
-    max-width: 400px;
-    box-sizing: border-box;
-}
-
-h1 { font-size: 24px; margin-bottom: 10px; }
-
-button {
+/* লোগো ডিজাইন */
+.bot-logo {
+    width: 80px;
+    height: 80px;
     background: #00d2ff;
-    border: none;
-    padding: 15px; /* মোবাইলে আঙুল দিয়ে টিপতে সুবিধা হবে */
-    border-radius: 12px;
-    color: #000;
-    font-weight: bold;
-    width: 100%; /* বাটনগুলো চওড়া হবে */
-    margin: 8px 0;
-    cursor: pointer;
-}
-
-input {
-    padding: 15px;
-    width: 100%;
-    border-radius: 10px;
-    border: none;
-    box-sizing: border-box; /* সাইজ ঠিক রাখার জন্য */
-    margin-bottom: 15px;
-    font-size: 16px; /* ইনপুট টেক্সট বড় দেখাবে */
-}
-
-#qrcode {
-    margin-top: 20px;
+    border-radius: 50%;
+    margin: 0 auto 15px;
     display: flex;
+    align-items: center;
     justify-content: center;
-    background: white;
-    padding: 15px;
-    border-radius: 15px;
+    font-size: 30px;
+    box-shadow: 0 0 20px #00d2ff;
 }
 
-/* বড় QR ইমেজ যাতে ভেঙে না যায় */
-canvas {
-    max-width: 100%;
-    height: auto;
+/* চ্যাট বক্স ডিজাইন */
+#chat-container {
+    height: 300px;
+    overflow-y: auto;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    margin-bottom: 15px;
+    text-align: left;
 }
