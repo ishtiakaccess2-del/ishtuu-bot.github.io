@@ -12,19 +12,22 @@
         <div class="bot-logo">🤖</div>
         <h1>Ishtuu Bot</h1>
         <p>লগইন করুন শুরু করতে:</p>
-        <button onclick="googleLogin()" style="margin-top:20px;">Google দিয়ে লগইন করুন</button>
-    </div>
+        <!-- index.html -->
+<button onclick="googleLogin()" class="login-btn">Google দিয়ে লগইন করুন</button>
 
-    <script>
-        const firebaseConfig = { /* আপনার কনফিগারেশন */ };
-        firebase.initializeApp(firebaseConfig);
-        
-        function googleLogin() {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            firebase.auth().signInWithPopup(provider).then(() => {
-                window.location.href = "dashboard.html";
-            });
-        }
-    </script>
+<script>
+    function googleLogin() {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(provider)
+        .then((result) => {
+            alert("লগইন সফল!");
+            window.location.href = "dashboard.html";
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            alert("লগইন এরর: " + error.message);
+        });
+    }
+</script>
 </body>
 </html>
