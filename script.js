@@ -54,3 +54,18 @@ function generateQR(data) {
 document.getElementById('userInput').addEventListener("keypress", (e) => {
     if (e.key === "Enter") processCommand();
 });
+// ১. লগইন আছে কিনা চেক করা (যাতে কেউ ড্যাশবোর্ডে সরাসরি ঢুকতে না পারে)
+firebase.auth().onAuthStateChanged(user => {
+    if (!user && window.location.pathname.includes("dashboard.html")) {
+        window.location.href = "index.html";
+    } else if (user) {
+        document.getElementById('user-info').innerHTML = `<p>হ্যালো, ${user.displayName}!</p>`;
+    }
+});
+
+// ২. লগআউট ফাংশন
+function logout() {
+    firebase.auth().signOut().then(() => {
+        window.location.href = "index.html";
+    });
+}
