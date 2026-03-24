@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css"> <!-- এখানে CSS ফাইল যুক্ত করুন -->
+    <title>Ishtuu Bot</title>
+</head>
+<body>
+
+    <div class="container">
+        <div id="login-screen">
+            <h1>ISHTUU</h1>
+            <p>আপনার স্মার্ট QR বট</p>
+            <button onclick="googleLogin()">Login with Google</button>
+        </div>
+
+        <div id="bot-screen" style="display:none;">
+            <h2 id="welcome-msg"></h2>
+            <p>কি তৈরি করতে চান?</p>
+            <div id="features">
+                <button onclick="showInput('ফোন নম্বর')">Phone</button>
+                <button onclick="showInput('লিঙ্ক')">Link</button>
+                <button onclick="showInput('মেসেজ')">Text</button>
+            </div>
+            <div id="input-section"></div>
+            <div id="qrcode"></div>
+        </div>
+    </div>
+
+    <!-- Firebase & QRCode scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
